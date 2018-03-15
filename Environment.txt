@@ -1,0 +1,28 @@
+#环境配置
+
+# python 3.6 配置
+$ sudo apt-get install python3.6
+
+# 安装Anaconda环境
+从官网上下载最新版本的Anaconda64位linux版本sh文件
+
+# 执行
+cd /* #文件路径
+$ bash Anaconda3-5.1.0-Linux-x86_64.sh #选择对应版本号进行安装
+
+# 升级conda到最新版本
+$ conda update -n base conda
+
+# 安装Pytorch
+# 由于墙的原因，用原始的源安装速度会很慢，有可能还会失败，所以这里先将源换为清华TUNA镜像源
+# 添加Anaconda的TUNA镜像
+$ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+# TUNA的help中镜像地址加有引号，需要去掉
+
+# 设置搜索时显示通道地址
+$  conda config --set show_channel_urls yes
+
+# 接下来安装Pytorch
+
+$ export PATH=~/anaconda3/bin:$PATH
+$ source ~/.bashrc
