@@ -9,6 +9,10 @@ $ sudo apt-get install python3.6
 # 执行
 cd /* #文件路径
 $ bash Anaconda3-5.1.0-Linux-x86_64.sh #选择对应版本号进行安装
+# 接下来以同样方式安装从官网下载的cuda
+# 安装完成后在～/.bashrc文件末尾加入文件路径
+# export PATH=/usr/anaconda3/bin:$PATH
+# export PATH=/usr/local/cuda/bin:$PATH    
 
 # 升级conda到最新版本
 $ conda update -n base conda
@@ -22,7 +26,60 @@ $ conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs
 # 设置搜索时显示通道地址
 $  conda config --set show_channel_urls yes
 
-# 接下来安装Pytorch
+# 接下来安装Pytorch 输入以下命令安装cuda9.1对应版本的pytorch
+conda install pytorch torchvision cuda91 -c pytorch
 
-$ export PATH=~/anaconda3/bin:$PATH
-$ source ~/.bashrc
+
+# python环境配置
+
+# 安装完整的vim
+$ sudo apt-get install vim-gnome
+
+#安装ctags，ctags用于支持taglist，必需！
+$ sudo apt-get install ctags
+
+# 安装taglist
+$ sudo apt-get install vim-scripts
+$ sudo vim-addons install taglist
+
+# 安装pydiction实现代码补全
+$ sudo wget http://www.pythonclub.org/_media/python-basic/pydiction-1.2.zip
+$ sudo unzip pydiction-1.2.zip
+# ~/.vim/after/ftplugin和~/.vim/tools/pydiction/目录默认不存在，需要自行创建
+$ sudo cp pydiction-1.2/python_pydiction.vim ~/.vim/after/ftplugin
+$ sudo cp pydiction-1.2/complete-dict ~/.vim/tools/pydiction/complete-dict
+
+# 编辑配置文件
+$ sudo vim ~/.vimrc
+
+let Tlist_Auto_Highlight_Tag=1
+let Tlist_Auto_Open=1
+let Tlist_Auto_Update=1
+let Tlist_Display_Tag_Scope=1
+let Tlist_Exit_OnlyWindow=1
+let Tlist_Enable_Dold_Column=1
+let Tlist_File_Fold_Auto_Close=1
+let Tlist_Show_One_File=1
+let Tlist_Use_Right_Window=1
+let Tlist_Use_SingleClick=1
+nnoremap <silent> <F8> :TlistToggle<CR> // 设定F8为taglist开关
+ 
+filetype plugin on
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascrīpt set omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
+autocmd FileType css set omnifunc=csscomplete#CompleteCSS
+autocmd FileType xml set omnifunc=xmlcomplete#CompleteTags
+autocmd FileType php set omnifunc=phpcomplete#CompletePHP
+autocmd FileType c set omnifunc=ccomplete#Complete
+ 
+ 
+let g:pydiction_location='~/.vim/tools/pydiction/complete-dict'
+set autoindent // 实现自动缩进
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set number
+
+
+
